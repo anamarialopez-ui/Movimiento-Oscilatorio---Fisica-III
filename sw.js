@@ -1,5 +1,5 @@
 // Service Worker para Cuaderno Interactivo Virtual Física III
-const CACHE_NAME = 'fisica3-cuaderno-v3';
+const CACHE_NAME = 'fisica3-cuaderno-v4';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
