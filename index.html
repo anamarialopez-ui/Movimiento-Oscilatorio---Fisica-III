@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#7C3AED">
+  <meta name="description" content="Cuaderno Virtual Interactivo de Física III: Movimiento Oscilatorio y Movimiento Armónico Simple (M.A.S.). Planos cartesianos estilo GeoGebra, simulaciones en tiempo real y resolución de problemas paso a paso.">
+  <meta name="author" content="Ana María López Giraldo, Daniela Alzate Jimenez, Maria Alejandra Ramirez Montes">
+  
+  <title>Cuaderno Interactivo Virtual • Física III: Movimiento Oscilatorio y M.A.S.</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/webp" href="imagenes/Portada.webp">
+
+  <!-- KaTeX CSS para fórmulas matemáticas nítidas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
+  
+  <!-- Estilos de la Aplicación -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/notebook.css">
+  <link rel="stylesheet" href="css/geogebra.css">
+  <link rel="stylesheet" href="css/simulation.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- KaTeX JS y Extensión Auto-render -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Contenedor del Viewport SPA -->
+  <div class="app-viewport">
+    
+    <!-- Barra Superior Minimalista -->
+    <header class="app-topbar">
+      <div class="topbar-brand">
+        <span class="topbar-badge">UTP • Semestre 12</span>
+        <h1 class="topbar-title">
+          Física III 
+          <span class="sub">• Movimiento Oscilatorio y M.A.S.</span>
+        </h1>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn-icon-nav" id="btn-font-size" title="Ajustar tamaño de letra para lectura cómoda">
+          <i data-lucide="type"></i>
+        </button>
+        <button class="btn-icon-nav" id="btn-toggle-sound" title="Alternar efecto de sonido de página">
+          <i data-lucide="volume-2"></i>
+        </button>
+        <button class="btn-icon-nav" id="btn-toggle-fullscreen" title="Pantalla Completa">
+          <i data-lucide="maximize"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Escenario Central del Cuaderno Virtual -->
+    <main class="notebook-stage">
+      <div class="notebook-book-frame" id="notebook-frame">
+        <!-- Contenedor donde se inyectan dinámicamente las hojas -->
+        <div id="notebook-pages-mount" style="width: 100%; height: 100%; position: relative;"></div>
+      </div>
+    </main>
+
+    <!-- Panel de Navegación Inferior Flotante -->
+    <footer class="app-bottombar">
+      <div class="nav-controls-card">
+        
+        <!-- Grupo Izquierdo: Inicio y Anterior -->
+        <div class="nav-group-left">
+          <button class="btn-nav-action" id="btn-home" title="Ir a la Portada">
+            <i data-lucide="home"></i>
+            <span class="label">Inicio</span>
+          </button>
+          <button class="btn-nav-action" id="btn-prev-page" title="Página Anterior (Flecha Izquierda)">
+            <i data-lucide="chevron-left"></i>
+            <span class="label">Anterior</span>
+          </button>
+        </div>
+
+        <!-- Grupo Central: Indicador y Slider -->
+        <div class="nav-group-center">
+          <div class="page-indicator-pill">
+            <i data-lucide="book-open" style="width: 15px; height: 15px;"></i>
+            <span>Página <strong id="current-page-num">1</strong> de <span id="total-pages-num">15</span></span>
+          </div>
+          <input type="range" class="page-slider" id="page-slider" min="1" max="15" value="1" title="Deslizar para cambiar de página">
+        </div>
+
+        <!-- Grupo Derecho: Siguiente y Vista General -->
+        <div class="nav-group-right">
+          <button class="btn-nav-action primary" id="btn-next-page" title="Página Siguiente (Flecha Derecha)">
+            <span class="label">Siguiente</span>
+            <i data-lucide="chevron-right"></i>
+          </button>
+          <button class="btn-nav-action" id="btn-overview" title="Vista en miniatura de todas las páginas">
+            <i data-lucide="grid"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Pie de Página Oficial Requerido -->
+      <div class="app-footer">
+        Cuaderno creado por: <strong>Ana María López Giraldo, Daniela Alzate Jimenez, Maria Alejandra Ramirez Montes</strong>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Modal de Cuadrícula de Páginas (Vista General) -->
+  <div class="modal-overlay" id="modal-overview">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i data-lucide="layout-grid"></i> Explorador del Cuaderno (15 Páginas)</h3>
+        <button class="btn-icon-nav" id="modal-overview-close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body-grid" id="overview-grid"></div>
+    </div>
+  </div>
+
+  <!-- Scripts de Datos Teóricos y Ejercicios -->
+  <script src="js/data/content.js"></script>
+  <script src="js/data/exercises.js"></script>
+  <script src="js/data/glossary-ref.js"></script>
+
+  <!-- Componentes Interactivos y Motores de Simulación -->
+  <script src="js/timeline-mindmap.js"></script>
+  <script src="js/geogebra-engine.js"></script>
+  <script src="js/physics-simulation.js"></script>
+  
+  <!-- Gestor del Cuaderno y Arranque de la App -->
+  <script src="js/notebook.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

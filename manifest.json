@@ -1,0 +1,16 @@
+{
+  "name": "Cuaderno Interactivo Virtual - Física III: Movimiento Oscilatorio y M.A.S.",
+  "short_name": "Física III Cuaderno",
+  "description": "Cuaderno virtual interactivo de Física III sobre Movimiento Oscilatorio y Movimiento Armónico Simple con planos GeoGebra y simulaciones en tiempo real.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FAF8FC",
+  "theme_color": "#7C3AED",
+  "icons": [
+    {
+      "src": "imagenes/Portada.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ]
+}
